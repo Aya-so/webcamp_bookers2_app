@@ -7,5 +7,7 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, presence: true
   validates :name, length: {minimum: 2}
+  
+  has_many :books, dependent: :destroy
 
 end
