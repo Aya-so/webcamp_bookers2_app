@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!,except: [:top, :about]
+  before_action :authenticate_user!,only: [:new, :create, :index, :edit, :show, :update, :destroy]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_out_path_for(resource)
