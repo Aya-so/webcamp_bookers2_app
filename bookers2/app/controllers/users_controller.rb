@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :user_edit_check, only: [:edit]
 
   def index
     @users = User.all
@@ -12,29 +13,29 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if current_user.id != @user.id
-      redirect_to user_path(current_user)
-    end
   end
 
   def update
     @user = User.find(params[:id])
-    if current_user.id != @user.id
-      redirect_to user_path(current_user)
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+      flash[:notice]="You have updated user successfully."
     else
-      if @user.update(user_params)
-        redirect_to user_path(@user)
-        flash[:notice] = "You have updated user successfully."
-      else
-        render :edit
-      end
+      render :edit
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :profile_image)
+    params.require(:user).permit(:name,:introduction,:profile_image)
+  end
+
+  def user_edit_check
+    @user = User.find(params[:id])
+    if @user != current_user
+      redirect_to user_path(current_user)
+    end
   end
 
 end
