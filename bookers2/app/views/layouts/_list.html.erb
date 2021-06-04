@@ -1,4 +1,6 @@
 <div class="col-md-3">
+
+    <!--ユーザー-->
     <h2>User info</h2>
 
     <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
@@ -9,22 +11,44 @@
 
         <tr>
           <th>name</th>
+          <th></th>
           <th><%= user.name %></th>
         </tr>
 
         <tr>
           <th>introduction</th>
+          <th></th>
           <th><%= user.introduction %></th>
+        </tr>
+
+        <tr>
+          <th>follows</th>
+          <th></th>
+          <th><%= link_to user.followings.count, user_followings_path(user) %></th>
+        </tr>
+        <tr>
+          <th>followers</th>
+          <th></th>
+          <th><%= link_to user.followers.count, user_followers_path(user) %></th>
         </tr>
 
      </tbody>
     </table>
 
+    <!--編集ボタン-->
+    <% unless current_user != user %>
     <div class="row">
       <%= link_to edit_user_path(user), class:"btn btn-outline-secondary btn-block" do %>
         <i class="fas fa-user-cog"></i>
       <% end %>
     </div>
+    <% end %>
+
+    <!--フォローボタン-->
+    <div class="row">
+      <%= render "relationships/follow_button", user: user %>
+    </div>
+
 
     <!--投稿フォーム-->
     <h2 class="mt-3">New book</h2>
