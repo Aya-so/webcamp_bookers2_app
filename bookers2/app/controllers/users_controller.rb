@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :user_edit_check, only: [:edit]
+  before_action :authenticate_user!
 
   def index
     @users = User.all
