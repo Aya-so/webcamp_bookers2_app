@@ -2,13 +2,14 @@ class SearchesController < ApplicationController
   before_action :authenticate_user!
 
   def search
-  	@model = params[:model]
-    @how = params[:how]
+  	@model = params[:search][:model]
+    @how = params[:search][:how]
+    @value = params[:search][:value]
 
     if @model == "user"
-      @users = User.search(params[:search], @model, @how)
+      @users = User.search(@value, @model, @how)
     else
-      @books = Book.search(params[:search], @model, @how)
+      @books = Book.search(@value, @model, @how)
     end
   end
 

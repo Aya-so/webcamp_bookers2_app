@@ -5,7 +5,24 @@
     <% if @users.present? %>
       <%= render "relationships/follow_list", user: @user, users:@users %>
     <% else %>
-      <p>ユーザーはいません</p>
+     <table class="table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Follows</th>
+          <th>Follows</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>ユーザーはいません</td>
+        </tr>
+      </tbody>
+    </table>
     <% end %>
   </div>
 </div>
