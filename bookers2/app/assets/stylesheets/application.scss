@@ -25,9 +25,14 @@
  }
 
  #error_explanation {
-    color: red;
+  color: red;
 }
 
 #notice {
-    color: green;
+   color: green;
+}
+
+.like {
+  text-decoration: none;
+  color: red;
 }
