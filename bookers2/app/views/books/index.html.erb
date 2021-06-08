@@ -1,3 +1,10 @@
+<!--検索窓-->
+<div class="container">
+  <div class="text-center">
+    <%= render "searches/search_form" %>
+  </div>
+</div>
+
 <div class="container">
 
   <div id="error_explanation">
@@ -41,9 +48,11 @@
               <td><%= link_to book.title, book_path(book.id) %></td>
               <td><%= book.body %></td>
 
-              <td><%= render "favorites/favorite", book: book %></td>
+              <td class="favorite"><%= render "favorites/favorite", book: book %></td>
 
               <td>コメント数: <%= book.book_comments.count %></td>
+
+              <td class="small"><%= book.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
 
              </tr>
           <% end %>
